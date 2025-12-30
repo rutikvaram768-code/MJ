@@ -16,13 +16,13 @@
     "EMAIL": "",
     "PASSWORD": "",
     "OTPKEY": "",
-    "BOTNAME": "AYUSH SHRIVASTAVA ",
-    "PREFIX": ".",
+    "BOTNAME": "ARIF BABU",
+    "PREFIX": "#",
     "ADMINBOT": [
-        "100051705871957"
+        "UID"
     ],
     "NDH": [
-        "100051705871957"
+        "UID"
     ],
     "DATABASE": {
         "sqlite": {
