@@ -2,10 +2,10 @@
   "language": "en",
   "DeveloperMode": false,
   "autoCreateDB": true,
-  "BOTNAME": "ARIF BABU 😉❤️",
-  "PREFIX": "#",
-  "ADMINBOT": ["61572909482910"],
-  "NDH": ["61572909482910"],
+  "BOTNAME": "™★𝘽𝙊𝙏 𝙅𝘼𝙉𝙐 3.0",
+  "PREFIX": ".",
+  "ADMINBOT": ["100016828397863"],
+  "NDH": ["100016828397863"],
   "adminOnly": false,
   "ndhOnly": false,
   "adminPaOnly": false,
@@ -20,7 +20,7 @@
       "storage": "data.sqlite"
     }
   },
-  "APPSTATEPATH": "ARIF-BABU.json",
+  "APPSTATEPATH": "Appstate.json",
   "EMAIL": "",
   "PASSWORD": "",
   "OTPKEY": "",
