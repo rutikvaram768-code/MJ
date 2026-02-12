@@ -3,7 +3,7 @@ module.exports.config = {
   name: "bye",
     version: "1.1.1",
   hasPermssion: 0,
-  credits: "SHAAN BABU", 
+  credits: "RUTIK BABU", 
   description: "Just Respond",
   commandCategory: "no prefix",
     cooldowns: 5, 
@@ -17,7 +17,7 @@ module.exports.handleEvent = function({ api, event, client, __GLOBAL }) {
 react.includes("byyy") ||
 react.includes("byy")) {
     var msg = {
-        body: `𝐁𝐘𝐄 𝐁𝐘𝐄 🙋‍♂ 𝐓𝐀𝐊𝐄 𝐂𝐀𝐑𝐄 𝐁𝐀𝐁𝐔 😇`,attachment: fs.createReadStream(__dirname + `/ARIF-BABU/BYE.gif`)
+        body: `𝐁𝐘𝐄 𝐁𝐘𝐄 🙋‍♂ 𝐓𝐀𝐊𝐄 𝐂𝐀𝐑𝐄 𝐁𝐀𝐁𝐔 😇`,attachment: fs.createReadStream(__dirname + `/RUTIK-BABU/BYE.gif`)
       }
       api.sendMessage(msg, threadID, messageID);
     api.setMessageReaction("🙋", event.messageID, (err) => {}, true)
