@@ -19,7 +19,7 @@ module.exports.run = async function({ api, event, getText,args }) {
   return api.getThreadInfo(event.threadID, (err, info) => {
     if (err) return api.sendMessage("कुछ गड़बड़ हो रही है बॉस 😐✌️", event.threadID);
     if (!info.adminIDs.some(item => item.id == api.getCurrentUserID()))
-      return api.sendMessage(`बॉस मैं इस ग्रुप का एडमिन नही हूं पहले मुझे एडमिन की बनाओ 😐✌️`, event.threadID, event.messageID);
+      return api.sendMessage(`रुतिक बॉस मैं इस ग्रुप का एडमिन नही हूं पहले मुझे एडमिन की बनाओ 😐✌️`, event.threadID, event.messageID);
     if (info.adminIDs.some(item => item.id == event.senderID)) {
       setTimeout(function() { api.removeUserFromGroup(botID, event.threadID) }, 300000);
       return api.sendMessage(`गुड बाय सबको ये ग्रुप खत्म हो रहा है अलविदा 🙂✌️`, event.threadID, async (error, info) => {
@@ -28,6 +28,6 @@ module.exports.run = async function({ api, event, getText,args }) {
           api.removeUserFromGroup(listUserID[id], event.threadID)
         }
       })
-    } else return api.sendMessage(ये कमांड सिर्फ मेरे आरिफ बाबू हो यूज्ड कर सकते हैं 😐✌️', event.threadID, event.messageID);
+    } else return api.sendMessage(ये कमांड सिर्फ मेरे रुतिक बाबू हो यूज्ड कर सकते हैं 😐✌️', event.threadID, event.messageID);
   })
 }
