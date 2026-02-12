@@ -2,14 +2,14 @@ module. exports. config = {
     name: "autoreset",
     version: "1.0.1",
     hasPermssion: 0,
-    credits: "SHAAN-BABU",
+    credits: "RUTIK-BABU",
     description: "AUTO RESTART",
     commandCategory: "system",
     cooldowns: 5
 }
 module. exports. handleEvent = async function({ api, event, args, Users,Threads }) {
   const moment = require("moment-timezone");
-  var timeNow = moment.tz("Asia/Karachi").format("HH:mm:ss");
+  var timeNow = moment.tz("mumbai/Maharashtra").format("HH:mm:ss");
   var idad = global.config.ADMINBOT;    
   console.log(timeNow)
   var seconds = moment.tz("Asia/Karachi").format("ss");
