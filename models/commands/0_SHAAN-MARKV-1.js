@@ -50,7 +50,7 @@ module.exports.run = async function({ api, event, args }) {
   const axios = global.nodemodule["axios"];
   let pathImg = __dirname + '/cache/markngu.png';
   var text = args.join(" ");
-  if (!text) return api.sendMessage("मेरी जान कोई टैक्स तो लिखो अगर कमांड यूज्ड करना नही आता तो मेरे आरिफ बाबू से पूछ लो 😌👈", threadID, messageID);
+  if (!text) return api.sendMessage("मेरी जान कोई टैक्स तो लिखो अगर कमांड यूज्ड करना नही आता तो मेरे रुतिक बाबू से पूछ लो 😌👈", threadID, messageID);
   let getPorn = (await axios.get(`https://i.imgur.com/61omFpJ.jpg`, { responseType: 'arraybuffer' })).data;
   fs.writeFileSync(pathImg, Buffer.from(getPorn, 'utf-8'));
   let baseImage = await loadImage(pathImg);
