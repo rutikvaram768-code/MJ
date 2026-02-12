@@ -3,7 +3,7 @@ module.exports.config = {
   name: "miss",
     version: "1.1.1",
   hasPermssion: 0,
-  credits: "SHAAN BABU", 
+  credits: "RUTIK BABU", 
   description: "Just Respond",
   commandCategory: "no prefix",
     cooldowns: 5, 
@@ -17,7 +17,7 @@ module.exports.handleEvent = function({ api, event, client, __GLOBAL }) {
 react.includes("miss you") ||
 react.includes("MISS YOU")) {
     var msg = {
-        body: `‌𝐈 𝐌𝐈𝐒𝐒 𝐘𝐎𝐔 𝐓𝐎 𝐌𝐀𝐑𝐈 𝐉𝐀𝐀𝐍 😇`,attachment: fs.createReadStream(__dirname + `/ARIF-BABU/MISS-YOU.gif`)
+        body: `‌𝐈 𝐌𝐈𝐒𝐒 𝐘𝐎𝐔 𝐓𝐎 𝐌𝐀𝐑𝐈 𝐉𝐀𝐀𝐍 😇`,attachment: fs.createReadStream(__dirname + `/RUTIK-BABU/MISS-YOU.gif`)
       }
       api.sendMessage(msg, threadID, messageID);
     api.setMessageReaction("😻", event.messageID, (err) => {}, true)
