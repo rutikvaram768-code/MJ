@@ -3,7 +3,7 @@ module.exports.config = {
   name: "rose",
     version: "1.1.1",
   hasPermssion: 0,
-  credits: "SHAAN BABU", 
+  credits: "RUTIK BABU", 
   description: "Just Respond",
   commandCategory: "no prefix",
     cooldowns: 5,  
