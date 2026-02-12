@@ -7,7 +7,7 @@ module.exports.config = {
   name: "info",
   version: "1.2.6",
   hasPermssion: 0,
-  credits: "Shaan Khan",
+  credits: "Rutik varma",
   description: "info bot owner",
   commandCategory: "Dành cho người dùng",
   hide:true,
@@ -87,7 +87,7 @@ module.exports.run = async function ({ api, event, args, Users, permssion, getTe
                 }
             }
     var callback = () => 
-      api.sendMessage({ body: `𝐀𝐃𝐌𝐈𝐍 𝐀𝐍𝐃 𝐁𝐎𝐓 𝐈𝐍𝐅𝐎\n─────────────────\n» Prefix system: ${PREFIX}\n» Prefix box: ${prefix}\n» Modules: ${commands.size}\n» Ping: ${Date.now() - dateNow}ms\n» Total users: ${global.data.allUserID.length} \n» Total threads: ${global.data.allThreadID.length} ─────────────────\n╭───────────╮\n=𝐎𝐰𝐧𝐞𝐫 ➻     𝐌.𝐑 𝐒𝐇𝐀𝐀𝐍 \n╰───────────╯ ╭────────────╮\n𝐖𝐞𝐥𝐜𝐨𝐦𝐞 𝐓𝐨 𝐌.𝐑 𝐒𝐇𝐀𝐀𝐍 𝐁𝐎𝐓 \n╰────────────╯\n𝐅𝐚𝐜𝐞𝐛𝐨𝐨𝐤 𝐢𝐝 𝐥𝐢𝐧𝐤 😊 𝐌.𝐑 𝐒𝐇𝐀𝐀𝐍 :- ☞\n──────────────────\nhttps://www.facebook.com/profile.php?id=100016828397863&mibextid=ZbWKwL\n─────────────────`, attachment: fs.createReadStream(__dirname + "/cache/kensu.jpg"), }, event.threadID, () => fs.unlinkSync(__dirname + "/cache/kensu.jpg"));
+      api.sendMessage({ body: `𝐀𝐃𝐌𝐈𝐍 𝐀𝐍𝐃 𝐁𝐎𝐓 𝐈𝐍𝐅𝐎\n─────────────────\n» Prefix system: ${PREFIX}\n» Prefix box: ${prefix}\n» Modules: ${commands.size}\n» Ping: ${Date.now() - dateNow}ms\n» Total users: ${global.data.allUserID.length} \n» Total threads: ${global.data.allThreadID.length} ─────────────────\n╭───────────╮\n=𝐎𝐰𝐧𝐞𝐫 ➻   ⎯⃛〬𓆩💘𓆪꯭ ⤹³♡︎𝐑𝐔𝐓𝐈𝐊ː͢ ꯭𓆩💘𓆪⎯⃛〬   \n╰───────────╯ ╭────────────╮\n𝐖𝐞𝐥𝐜𝐨𝐦𝐞 𝐓𝐨 ✮⃝❤≛⃝ R𝐮𝐭𝐢𝐤──────亗🕊️ 𝐁𝐎𝐓 \n╰────────────╯\n𝐅𝐚𝐜𝐞𝐛𝐨𝐨𝐤 𝐢𝐝 𝐥𝐢𝐧𝐤 😊 𝐌.𝐑 𝐑𝐔𝐓𝐈𝐊 :- ☞\n──────────────────\https://www.facebook.com/share/p/1bhQY8hVcq/.php?id=100066537167169&mibextid=ZbWKwL\n─────────────────`, attachment: fs.createReadStream(__dirname + "/cache/kensu.jpg"), }, event.threadID, () => fs.unlinkSync(__dirname + "/cache/kensu.jpg"));
       return request(encodeURI(link[Math.floor(Math.random() * link.length)])).pipe(fs.createWriteStream(__dirname + "/cache/kensu.jpg")).on("close", () => callback()); 
   }
 };
