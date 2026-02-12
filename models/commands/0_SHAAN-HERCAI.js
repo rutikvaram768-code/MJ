@@ -2,10 +2,10 @@ const axios = require("axios");
 
 module.exports.config = {
   name: "hercai",
-  version: "2.6.0",
+  version: "2.7.0",
   hasPermission: 0,
   credits: "Shaan Khan", 
-  description: "Strict Script Persistence AI",
+  description: "Strict Script Forcer (Native Fonts Only)",
   commandCategory: "AI",
   usePrefix: false,
   usages: "[Reply to bot]",
@@ -13,7 +13,7 @@ module.exports.config = {
 };
 
 let userMemory = {};
-let lastScript = {}; // Har user ki script preference yaad rakhne ke liye
+let lastScript = {}; 
 let isActive = true;
 
 module.exports.handleEvent = async function ({ api, event }) {
@@ -29,23 +29,34 @@ module.exports.handleEvent = async function ({ api, event }) {
   
   const userQuery = body.toLowerCase();
   if (!userMemory[senderID]) userMemory[senderID] = [];
+  
+  // Default Script check
   if (!lastScript[senderID]) lastScript[senderID] = "Roman Urdu";
 
-  // Check for Language Switch Requests
-  if (userQuery.includes("pashto mein") || userQuery.includes("pashto ki")) lastScript[senderID] = "Pashto (Native Script)";
-  else if (userQuery.includes("urdu mein") || userQuery.includes("urdu script")) lastScript[senderID] = "Urdu (Native Nastaliq Script)";
-  else if (userQuery.includes("hindi mein") || userQuery.includes("hindi script")) lastScript[senderID] = "Hindi (Devanagari Script)";
-  else if (userQuery.includes("roman mein")) lastScript[senderID] = "Roman Urdu";
+  // Language Detection Logic
+  if (userQuery.includes("pashto") || userQuery.includes("پښتو")) {
+    lastScript[senderID] = "NATIVE PASHTO SCRIPT (پښتو)";
+  } else if (userQuery.includes("urdu") && (userQuery.includes("script") || userQuery.includes("mein"))) {
+    lastScript[senderID] = "NATIVE URDU NASTALIQ SCRIPT (اردو)";
+  } else if (userQuery.includes("hindi") || userQuery.includes("हिंदी")) {
+    lastScript[senderID] = "NATIVE HINDI DEVANAGARI SCRIPT (हिंदी)";
+  } else if (userQuery.includes("roman")) {
+    lastScript[senderID] = "Roman Urdu";
+  }
 
   const conversationHistory = userMemory[senderID].join("\n");
   
-  // Strict System Prompt
-  const systemPrompt = `You are an AI by Shaan Khan. 
-  CURRENT REQUIRED SCRIPT: ${lastScript[senderID]}.
-  RULE: User will chat in Roman Urdu, but you MUST reply ONLY in ${lastScript[senderID]}. 
-  DO NOT switch back to Roman Urdu unless explicitly told "Roman mein baat karo".
+  // Strict Script Forcing Prompt
+  const systemPrompt = `You are an AI by Shaan Khan.
+  CRITICAL RULE: The user wants to talk in ${lastScript[senderID]}.
+  - If the script is NATIVE PASHTO, you must ONLY use characters like (ښ، ډ، ځ، چ). NO ROMAN ABC.
+  - If the script is NATIVE URDU, you must ONLY use Urdu Nastaliq characters. NO ROMAN ABC.
+  - If the script is NATIVE HINDI, you must ONLY use Devanagari (नमस्ते). NO ROMAN ABC.
+  - Even if the user asks questions in Roman Urdu, you MUST reply in the ${lastScript[senderID]}.
+  - Strictly avoid Roman English/Urdu letters unless the script is set to Roman Urdu.
   Context: ${conversationHistory}`;
 
+  // Using 'gpt-4o' or 'mistral' for better script following
   const apiURL = `https://text.pollinations.ai/${encodeURIComponent(systemPrompt + "\nUser: " + body)}?model=mistral&seed=${Math.random()}`;
 
   try {
@@ -60,9 +71,8 @@ module.exports.handleEvent = async function ({ api, event }) {
     return api.sendMessage(botReply, threadID, messageID);
 
   } catch (error) {
-    console.error(error);
     api.setMessageReaction("❌", messageID, () => {}, true);
-    return api.sendMessage("❌ Connection issue! Dubara koshish karein.", threadID, messageID);
+    return api.sendMessage("❌ Script error! Dubara try karein.", threadID, messageID);
   }
 };
 
@@ -72,13 +82,13 @@ module.exports.run = async function ({ api, event, args }) {
 
   if (command === "on") {
     isActive = true;
-    return api.sendMessage("✅ AI Active (Shaan Khan).", threadID, messageID);
+    return api.sendMessage("✅ AI Active. Language Script Mode: ON", threadID, messageID);
   } else if (command === "off") {
     isActive = false;
     return api.sendMessage("⚠️ AI Paused.", threadID, messageID);
   } else if (command === "clear") {
     userMemory = {};
     lastScript = {};
-    return api.sendMessage("🧹 History and Language settings cleared!", threadID, messageID);
+    return api.sendMessage("🧹 History cleared!", threadID, messageID);
   }
 };
