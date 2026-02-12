@@ -6,7 +6,7 @@ module.exports.config = {
   name: "upt",
   version: "2.1.0",
   hasPermssion: 0,
-  credits: "ARIF BABU",
+  credits: "SHAAN BABU",
   description: "Show bot uptime with date & time",
   commandCategory: "system",
   usages: "upt",
@@ -28,9 +28,9 @@ async function sendUptime(api, event) {
   const uptime = process.uptime();
   const now = new Date();
 
-  // 🇮🇳 INDIA TIME
+  // 🇵🇰 PAKISTAN TIME
   const time = now.toLocaleTimeString("en-IN", {
-    timeZone: "Asia/Kolkata",
+    timeZone: "Asia/Karachi",
     hour: "2-digit",
     minute: "2-digit",
     second: "2-digit",
@@ -38,14 +38,14 @@ async function sendUptime(api, event) {
   });
 
   const date = now.toLocaleDateString("en-IN", {
-    timeZone: "Asia/Kolkata",
+    timeZone: "Asia/Karachi",
     day: "2-digit",
     month: "long",
     year: "numeric"
   });
 
   const day = now.toLocaleDateString("en-IN", {
-    timeZone: "Asia/Kolkata",
+    timeZone: "Asia/Karachi",
     weekday: "long"
   });
 
@@ -60,7 +60,7 @@ async function sendUptime(api, event) {
 ✰ DAY ➪ ${day} 🥳
 
 ༺══─────────══༻
-MADE BY ❤️‍🔥 ARIF BABU`;
+MADE BY ❤️‍🔥 SHAAN-KHAN-K`;
 
   return api.sendMessage(msg, threadID, messageID);
 }
