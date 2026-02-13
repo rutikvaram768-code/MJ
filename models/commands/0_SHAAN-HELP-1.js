@@ -3,7 +3,7 @@ module.exports.config = {
   version: "1.0.2",
   hasPermssion: 0,
   credits: "SHAAN BABU",
-  description: "THIS BOT IS MR SHAAN BABU",
+  description: "THIS BOT IS MR RUTIK BABU",
   usePrefix: true,
   commandCategory: "BOT-COMMAND-LIST",
   usages: "HELP",
@@ -50,7 +50,7 @@ module.exports. run = function({ api, event, args, getText }) {
     const page = parseInt(args[0]) || 1;
     const numberOfOnePage = 8;
     let i = 0;
-    let msg = "┏━━━━━┓\n    SHAAN-KHAN-K                    ✧═══•❁🥱❁•═══✧\n┗━━━━━┛\n\n✧═══❁♥️COMMAND LIST ♥️❁═══✧\n\n";
+    let msg = "┏━━━━━┓\n    ✮⃝❤≛⃝ R𝐮𝐭𝐢𝐤──────亗🕊️                    ✧═══•❁🥱❁•═══✧\n┗━━━━━┛\n\n✧═══❁♥️COMMAND LIST ♥️❁═══✧\n\n";
 
     for (var [name, value] of (commands)) {
       name += 
@@ -65,7 +65,7 @@ module.exports. run = function({ api, event, args, getText }) {
 
     for (let item of returnArray) msg += `🥀  [${++i}] → ${global.config.PREFIX}${item} ♥️\n`; 
 
-    const text = `PAGE 🥀   [${page}/${Math.ceil(arrayInfo.length/numberOfOnePage)}]\n\nOR COMMAND KE LIYE HELP-2 TYPE KRO\nTHIS BOT IS MADE BY MR SHAAN-KHAN🙂✌️\n\n\n\n❁ ═════ ❃SHAAN-BABU❃ ═════ ❁`;
+    const text = `PAGE 🥀   [${page}/${Math.ceil(arrayInfo.length/numberOfOnePage)}]\n\nOR COMMAND KE LIYE HELP-2 TYPE KRO\nTHIS BOT IS MADE BY MR RUTIK-KHAN🙂✌️\n\n\n\n❁ ═════ ✮⃝❤≛⃝ R𝐮𝐭𝐢𝐤──────亗🕊️ ═════ ❁`;
     return api.sendMessage(msg + "\n" + text, threadID, async (error, info) => {
       if (autoUnsend) {
         await new Promise(resolve => setTimeout(resolve, delayUnsend * 10000));
