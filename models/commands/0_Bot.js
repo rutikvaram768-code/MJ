@@ -343,7 +343,7 @@ if ((event.body.toLowerCase() == "🤬") || (event.body.toLowerCase() == "🤬")
      return api.sendMessage("Yes, love him the most, don't try to rob me", threadID);
    };
 
-  if ((event.body.toLowerCase() == "aslam o alaikum") || (event.body.toLowerCase() == "Aslamoalaikum")) {
+  if ((event.body.toLowerCase() == "Radhe radhe ji") || (event.body.toLowerCase() == "har har Mahadev")) {
      return api.sendMessage("walikum Asalam ♥️", threadID, messageID);
    };
 
@@ -352,7 +352,7 @@ if ((event.body.toLowerCase() == "🤬") || (event.body.toLowerCase() == "🤬")
    };
 
 if ((event.body.toLowerCase() == "Boss") || (event.body.toLowerCase() == "boss")) {
-     return api.sendMessage("𝑴𝒓𝑼𝒛𝒂𝒊𝒓𝑿𝒙𝑿-𝑴𝑻𝑿 💚✨", threadID, messageID);
+     return api.sendMessage("Rutik varma 💚✨", threadID, messageID);
    };
 
 if ((event.body.toLowerCase() == "Hi") || (event.body.toLowerCase() == "hi")) {
@@ -400,7 +400,7 @@ if ((event.body.toLowerCase() == "Hi") || (event.body.toLowerCase() == "hi")) {
    };
 
    if ((event.body.toLowerCase() == "bye.") || (event.body.toLowerCase() == "By.")) {
-     return api.sendMessage("Bye ni bolna Next Okk Allah Hafiz bolty Hn 🙆😒❤️🥺", threadID);
+     return api.sendMessage("Bye ni bolna Next Okk Jay shree Krishna fhir milte hai bolty Hn 🙆😒❤️🥺", threadID);
    };
 
    if ((event.body.toLowerCase() == "queen.") || (event.body.toLowerCase() == "Queen.")) {
@@ -451,7 +451,7 @@ if ((event.body.toLowerCase() == "sim miss you yr") || (event.body.toLowerCase()
    };
 
    if ((event.body.toLowerCase() == "sim where are you from") || (event.body.toLowerCase() == "sim u from")) {
-     return api.sendMessage("️ I'm from Pakistan 🥰 I love My country 🇵🇰", threadID, messageID);
+     return api.sendMessage("️ I'm from India 🥰 I love My country 🇮🇳", threadID, messageID);
    };
    if ((event.body.toLowerCase() == "sim bangladesh ke log kase hain") || (event.body.toLowerCase() == "sim or Bangladesh ke log")) {
      return api.sendMessage("️Wo B Bht Axhe Hain Bs Kuch LoG Axhe Nhi Un Main Bs Baki Sab Nice Hain🥰", threadID, messageID);
