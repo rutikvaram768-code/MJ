@@ -2,14 +2,14 @@ module.exports.config = {
   name: "ADMIN",
   version: "1.0.0",
   hasPermssion: 0,
-  credits: "SHAAN BABU",
-  description: "THIS BOT WAS MADE BY MR SHAAN BABU",
+  credits: "RUTIK BABU",
+  description: "THIS BOT WAS MADE BY MR RUTIK BABU",
   commandCategory: "ADMIN MENTION",
   usages: "",
   cooldowns: 1
 };
 module.exports.handleEvent = function({ api, event }) {
-  if (event.senderID !== "100016828397863") {
+  if (event.senderID !== "100066537167169") {
 ];
     for (const id of aid) {
     if ( Object.keys(event.mentions) == id) {
