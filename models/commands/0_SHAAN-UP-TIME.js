@@ -6,7 +6,7 @@ module.exports.config = {
   name: "upt",
   version: "2.1.0",
   hasPermssion: 0,
-  credits: "SHAAN BABU",
+  credits: "RUTIK BABU",
   description: "Show bot uptime with date & time",
   commandCategory: "system",
   usages: "upt",
