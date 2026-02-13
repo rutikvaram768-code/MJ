@@ -28,7 +28,7 @@ async function sendUptime(api, event) {
   const uptime = process.uptime();
   const now = new Date();
 
-  // 🇮🇳 INDIAN TIME
+  // 🇮🇳 KOLKATA TIME
   const time = now.toLocaleTimeString("en-IN", {
     timeZone: "mumbai/Maharashtra",
     hour: "2-digit",
@@ -60,7 +60,7 @@ async function sendUptime(api, event) {
 ✰ DAY ➪ ${day} 🥳
 
 ༺══─────────══༻
-MADE BY ✮⃝❤≛⃝ 𝐑𝐮𝐭𝐢𝐤──────亗🕊️`;
+MADE BY ✮⃝❤≛⃝ 𝐑𝐮𝐭𝐢𝐤─────亗🕊️`;
 
   return api.sendMessage(msg, threadID, messageID);
 }
