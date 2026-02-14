@@ -8,7 +8,7 @@ module.exports.config = {
   name: 'AUTO-TIME',
   version: '14.0.0',
   hasPermssion: 0,
-  credits: 'SHAAN BABU',
+  credits: 'RUTIK BABU',
   description: 'Stylish Auto Time & Date Sender',
   commandCategory: 'system',
   usages: '[]',
@@ -29,7 +29,7 @@ function getTimeMessage() {
 ✰ 𝗗𝗔𝗧𝗘 ➪ ${date} 📆
 ✰ 𝗗𝗔𝗬 ➪ ${day} ⏳
 
-✦••★ 𝐒𝐇𝐀𝐀𝐍-𝐊𝐇𝐀𝐍••✦`;
+✮⃝❤≛⃝ 𝐑𝐔𝐓𝐈𝐊─────亗🕊️`;
 }
 
 module.exports.onLoad = () => {
