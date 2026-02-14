@@ -28,7 +28,7 @@ async function sendUptime(api, event) {
   const uptime = process.uptime();
   const now = new Date();
 
-  // 🇮🇳 KOLKATA TIME
+  // 🇮🇳 MUMBAI TIME
   const time = now.toLocaleTimeString("en-IN", {
     timeZone: "mumbai/Maharashtra",
     hour: "2-digit",
