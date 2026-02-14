@@ -17,7 +17,7 @@ module.exports.config = {
 
 // STYLISH TIME MESSAGE
 function getTimeMessage() {
-  const now = moment().tz("Asia/Karachi");
+  const now = moment().tz("Mumbai/Maharashtra");
 
   const time = now.format("hh:mm A");
   const date = now.format("DD MMMM YYYY");
