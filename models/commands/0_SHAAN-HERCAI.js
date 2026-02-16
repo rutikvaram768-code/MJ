@@ -1,4 +1,4 @@
-const axios = require("axios");
+c1234onst axios = require("axios");
 
 module.exports.config = {
   name: "hercai",
