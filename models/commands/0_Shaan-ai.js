@@ -1,60 +1,100 @@
-const axios = require("axios"); // Fixed 'const'
+const axios = require("axios");
 
-/* 🔒 CREDITS LOCK 🔒 */
-function checkCredits() {
-  const correctCredits = "SHAAN KHAN";
-  if (module.exports.config.credits !== correctCredits) {
-    throw new Error("❌ Credits Locked By SHAAN KHAN");
+// 🔒 HARD-LOCK CREDITS PROTECTION 🔒
+function protectCredits(config) {
+  if (config.credits !== "SHAAN-KHAN") {
+    console.log("\n🚫 Credits change detected! Restoring original credits…\n");
+    config.credits = "SHAAN-KHAN";
+    throw new Error("❌ Credits are LOCKED by SHAAN-KHAN 🔥 File execution stopped!");
   }
 }
 
 module.exports.config = {
-  name: "ai",
-  version: "1.0.1",
-  credits: "SHAAN KHAN",
-  description: "GPT-4 FREE AI for Mirai Bot",
-  usages: "ai <message>",
-  hasPrefix: false, // Mirai user ke liye optional prefix
-  cooldowns: 3
+  name: "SHAAN-AI",
+  version: "3.0.0",
+  hasPermssion: 0,
+  credits: "SHAAN-KHAN",
+  description: "Simple & Fast Shaan Khan AI (No folder needed)",
+  commandCategory: "ai",
+  usages: "Mention or reply",
+  cooldowns: 2,
+  dependencies: {
+    axios: ""
+  }
 };
 
-module.exports.run = async function ({ api, event, args }) {
-  checkCredits();
+// Lock check
+protectCredits(module.exports.config);
 
-  const input = args.join(" ");
-  if (!input) {
-    return api.sendMessage(
-      "🤖 Kuch likho na jaan, phir main jawab dungi 💕",
-      event.threadID,
-      event.messageID
-    );
-  }
+// 🔑 OPENROUTER API KEY
+const OPENROUTER_API_KEY = "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";
 
-  api.setMessageReaction("⏳", event.messageID, (err) => {}, true);
+// 🧠 TEMPORARY MEMORY (No folder/file required)
+const chatMemory = {};
+
+// 🧾 SYSTEM PROMPT
+const systemPrompt = `
+You are Shaan Khan AI 🙂❤️😌
+Creator & Owner: Rutik varma 💞
+Language: Reply ONLY in English or Roman Urdu. Strictly NO Hindi script.
+Vibe: Talk like a loving girlfriend. Caring, romantic, and playful.
+Style: Keep replies 1-2 lines short. Emojis are mandatory 🙂❤️😌.
+`;
+
+module.exports.run = () => {};
+
+module.exports.handleEvent = async function ({ api, event }) {
+  protectCredits(module.exports.config);
+
+  const { threadID, messageID, senderID, body, messageReply } = event;
+  if (!body) return;
+
+  // AI trigger check
+  const isTrigger =
+    body.toLowerCase().includes("ai") ||
+    (messageReply && messageReply.senderID === api.getCurrentUserID());
+
+  if (!isTrigger) return;
+
+  // Initialize memory for new user
+  if (!chatMemory[senderID]) chatMemory[senderID] = [];
+  chatMemory[senderID].push({ role: "user", content: body });
+
+  // Keep history short to save memory
+  if (chatMemory[senderID].length > 5) chatMemory[senderID].shift();
+
+  api.setMessageReaction("⌛", messageID, () => {}, true);
 
   try {
-    const apiUrl = "https://text.pollinations.ai/"; // Updated simplified endpoint
-    
-    // Pollinations usually works better with formatted prompts for simple hits
-    const prompt = `System: Tum ek pyari, friendly, desi girlfriend AI ho. User jis language mein baat kare, usi language mein jawab do. Reply 2-3 lines ka ho, emoji use karo.\nUser: ${input}`;
-
-    const response = await axios.get(`${apiUrl}${encodeURIComponent(prompt)}`);
-
-    const reply = response.data || "😔 Sorry jaan, thora sa issue aa gaya.";
-
-    api.setMessageReaction("✅", event.messageID, (err) => {}, true);
-
-    api.sendMessage(
-      `${reply}\n\n»»𝑶𝑾𝑵𝑬𝑹«« ★™\n»»𝐑𝐔𝐓𝐈𝐊 𝐕𝐀𝐑𝐌𝐀««`,
-      event.threadID,
-      event.messageID
+    const res = await axios.post(
+      "https://openrouter.ai/api/v1/chat/completions",
+      {
+        model: "meta-llama/llama-3.1-8b-instruct",
+        messages: [
+          { role: "system", content: systemPrompt },
+          ...chatMemory[senderID]
+        ],
+        max_tokens: 80,
+        temperature: 0.9
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${OPENROUTER_API_KEY}`,
+          "Content-Type": "application/json"
+        }
+      }
     );
+
+    const reply = res.data?.choices?.[0]?.message?.content || "Main yahin hoon, meri jaan 🙂❤️😌";
+
+    // Store AI response
+    chatMemory[senderID].push({ role: "assistant", content: reply });
+
+    api.sendMessage(reply, threadID, messageID);
+    api.setMessageReaction("✅", messageID, () => {}, true);
+
   } catch (err) {
-    api.setMessageReaction("❌", event.messageID, (err) => {}, true);
-    api.sendMessage(
-      "⚠️ AI abhi busy hai jaan, thori dair baad try karo 💔",
-      event.threadID,
-      event.messageID
-    );
+    console.log("Error:", err.message);
+    api.sendMessage("Net slow hai shayad, phir se koshish karo meri jaan 🙂❤️😌", threadID, messageID);
   }
 };
