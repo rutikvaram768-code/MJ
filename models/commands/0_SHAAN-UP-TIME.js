@@ -1,4 +1,4 @@
-const os = require("os");
+1234const os = require("os");
 
 global.client.timeStart = global.client.timeStart || Date.now();
 
