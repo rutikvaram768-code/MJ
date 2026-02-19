@@ -60,5 +60,5 @@ module.exports.handleEvent = async function ({ api, event }) {
 };
 
 module.exports.run = async function ({ api, event }) {
-  api.sendMessage("Uff! Main aa gayi. Shaan ki baby ready hai! Mujhse baat karni hai toh mere message par reply karo. 😉🔥", event.threadID);
+  api.sendMessage("Uff! Main aa gayi. Rutik ki baby ready hai! Mujhse baat karni hai toh mere message par reply karo. 😉🔥", event.threadID);
 };
