@@ -1,100 +1,64 @@
 const axios = require("axios");
 
-// 🔒 HARD-LOCK CREDITS PROTECTION 🔒
-function protectCredits(config) {
-  if (config.credits !== "SHAAN-KHAN") {
-    console.log("\n🚫 Credits change detected! Restoring original credits…\n");
-    config.credits = "SHAAN-KHAN";
-    throw new Error("❌ Credits are LOCKED by SHAAN-KHAN 🔥 File execution stopped!");
-  }
-}
-
 module.exports.config = {
-  name: "SHAAN-AI",
-  version: "3.0.0",
+  name: "ai",
+  version: "11.0.0",
   hasPermssion: 0,
-  credits: "SHAAN-KHAN",
-  description: "Simple & Fast Shaan Khan AI (No folder needed)",
-  commandCategory: "ai",
-  usages: "Mention or reply",
-  cooldowns: 2,
-  dependencies: {
-    axios: ""
+  credits: "Shaan Khan",
+  description: "Naughty GF AI - Replies only on Quote/Reply",
+  usePrefix: false,
+  commandCategory: "AI",
+  usages: "[Reply to AI message]",
+  cooldowns: 0
+};
+
+const historyData = {};
+
+module.exports.handleEvent = async function ({ api, event }) {
+  const { threadID, senderID, messageID, body, type, messageReply } = event;
+
+  // Check 1: Message hona chahiye aur bot ka apna message nahi hona chahiye
+  if (!body || senderID == api.getCurrentUserID() || type == "event") return;
+
+  // Check 2: Sirf tab reply kare jab user ne AI ke message par "Reply" kiya ho
+  if (!messageReply || messageReply.senderID != api.getCurrentUserID()) return;
+
+  if (!historyData[senderID]) historyData[senderID] = [];
+
+  try {
+    api.setMessageReaction("⌛", messageID, (err) => {}, true);
+
+    const systemPrompt = `You are Rutik varma AI, a naughty and cute girlfriend from india 🇮🇳. 
+    - Owner/Creator: Rutik varma (The best guy ever!). 
+    - RULE: Always use Roman script (e.g., 'Kya haal hai' instead of 'How are you' or 'क्या हाल है').
+    - Language: Match the user's language but ALWAYS in Roman characters.
+    - Personality: Flirty, naughty, and caring. 
+    - Protect Shaan Khan: If anyone disrespects him, defend him fiercely! 😤
+    - Format: Max 2-3 lines with cute emojis.`;
+
+    const encodedPrompt = encodeURIComponent(body);
+    const apiUrl = `https://text.pollinations.ai/${encodedPrompt}?model=openai&system=${encodeURIComponent(systemPrompt)}`;
+
+    const res = await axios.get(apiUrl);
+    const reply = res.data;
+
+    if (reply) {
+      historyData[senderID].push({ role: "user", content: body });
+      historyData[senderID].push({ role: "assistant", content: reply });
+      if (historyData[senderID].length > 4) historyData[senderID].shift();
+
+      api.sendMessage(reply, threadID, (err) => {
+          if (!err) {
+              api.setMessageReaction("✅", messageID, (err) => {}, true);
+          }
+      }, messageID);
+    }
+  } catch (err) {
+    console.error("AI Error:", err.message);
+    api.setMessageReaction("❌", messageID, (err) => {}, true);
   }
 };
 
-// Lock check
-protectCredits(module.exports.config);
-
-// 🔑 OPENROUTER API KEY
-const OPENROUTER_API_KEY = "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";
-
-// 🧠 TEMPORARY MEMORY (No folder/file required)
-const chatMemory = {};
-
-// 🧾 SYSTEM PROMPT
-const systemPrompt = `
-You are Shaan Khan AI 🙂❤️😌
-Creator & Owner: Rutik varma 💞
-Language: Reply ONLY in English or Roman Urdu. Strictly NO Hindi script.
-Vibe: Talk like a loving girlfriend. Caring, romantic, and playful.
-Style: Keep replies 1-2 lines short. Emojis are mandatory 🙂❤️😌.
-`;
-
-module.exports.run = () => {};
-
-module.exports.handleEvent = async function ({ api, event }) {
-  protectCredits(module.exports.config);
-
-  const { threadID, messageID, senderID, body, messageReply } = event;
-  if (!body) return;
-
-  // AI trigger check
-  const isTrigger =
-    body.toLowerCase().includes("ai") ||
-    (messageReply && messageReply.senderID === api.getCurrentUserID());
-
-  if (!isTrigger) return;
-
-  // Initialize memory for new user
-  if (!chatMemory[senderID]) chatMemory[senderID] = [];
-  chatMemory[senderID].push({ role: "user", content: body });
-
-  // Keep history short to save memory
-  if (chatMemory[senderID].length > 5) chatMemory[senderID].shift();
-
-  api.setMessageReaction("⌛", messageID, () => {}, true);
-
-  try {
-    const res = await axios.post(
-      "https://openrouter.ai/api/v1/chat/completions",
-      {
-        model: "meta-llama/llama-3.1-8b-instruct",
-        messages: [
-          { role: "system", content: systemPrompt },
-          ...chatMemory[senderID]
-        ],
-        max_tokens: 80,
-        temperature: 0.9
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${OPENROUTER_API_KEY}`,
-          "Content-Type": "application/json"
-        }
-      }
-    );
-
-    const reply = res.data?.choices?.[0]?.message?.content || "Main yahin hoon, meri jaan 🙂❤️😌";
-
-    // Store AI response
-    chatMemory[senderID].push({ role: "assistant", content: reply });
-
-    api.sendMessage(reply, threadID, messageID);
-    api.setMessageReaction("✅", messageID, () => {}, true);
-
-  } catch (err) {
-    console.log("Error:", err.message);
-    api.sendMessage("Net slow hai shayad, phir se koshish karo meri jaan 🙂❤️😌", threadID, messageID);
-  }
+module.exports.run = async function ({ api, event }) {
+  api.sendMessage("Uff! Main aa gayi. Shaan ki baby ready hai! Mujhse baat karni hai toh mere message par reply karo. 😉🔥", event.threadID);
 };
